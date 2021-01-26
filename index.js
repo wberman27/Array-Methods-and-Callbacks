@@ -28,7 +28,7 @@ hint - you should be looking at the stage key inside of the objects
 const finals = [];
 function getFinals(data){
     for(let i=0; i<data.length; i++){
-        if(data[i]["Stage"] === "Final"){
+        if(data[i]["Stage"] === "Final" && finals.includes(data[i]) === false){
             finals.push(data[i]);
         }
     } return finals;
@@ -87,7 +87,7 @@ hint: the strings returned need to exactly match the string in step 4.
 
 const hist = [];
 function getWinnersByYear(array, CB1, CB2) {
-    for(let i=0; i < CB1.length/6; i++){
+    for(let i=0; i < CB1.length; i++){
         array.push(`In ${CB1[i]}, ${CB2[i]} won the world cup!`)
     }return array;
 };
@@ -104,10 +104,13 @@ Use the higher order function getAverageGoals to do the following:
  Example of invocation: getAverageGoals(getFinals(fifaData));
 */
 
-function getAverageGoals(CB){
-    CB.reduce((total,item) => (total + item["Home Team Goals"] + item["Away Team Goals"]) / CB.length, 0);
+function getAverageGoals(CB)
+{
+    return (addFunc / CB.length).toFixed(2);
 }
-    console.log(getAverageGoals(getFinals(fifaData)));
+const addFunc = finals.reduce((total,item) => total += (item["Home Team Goals"] + item["Away Team Goals"]), 0);
+
+console.log(getAverageGoals(getFinals(fifaData)));
 
 
 
