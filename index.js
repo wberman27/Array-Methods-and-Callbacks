@@ -47,8 +47,10 @@ Use the higher-order function called getYears to do the following:
 const years = [];
 function getYears(array, CB){
     for(let i=0; i<CB.length; i++){
+        if(years.includes(CB[i]['Year']) === false){
         array.push(CB[i]['Year']);
-    }return array;
+        }
+    }return years;
 }
 console.log(getYears(years, getFinals(fifaData)));
 
@@ -61,16 +63,17 @@ Use the higher-order function getWinners to do the following:
 4. Returns the names of all winning countries in an array called `winners` */ 
 
 const winners = [];
-function getWinners(array, CB) {
-    for(let i=0; i<CB.length; i++){
-        if(CB[i]["Home Team Goals"] > CB[i]["Away Team Goals"]){
-            winners.push(CB[i]["Home Team Name"]);
-        } else {
-            winners.push(CB[i]["Away Team Name"]);
-        } 
+function getWinners(array, CB1) {
+    for(let i=0; i<CB1.length; i++){
+        if(CB1[i]["Home Team Goals"] > CB1[i]["Away Team Goals"]){
+                winners.push(CB1[i]["Home Team Name"]);
+        }
+            else {
+                    winners.push(CB1[i]["Away Team Name"]);
+                }
+                  
     }return winners;
 };
-
 console.log(getWinners(winners, getFinals(fifaData)));
 
 
@@ -89,7 +92,7 @@ const hist = [];
 function getWinnersByYear(array, CB1, CB2) {
     for(let i=0; i < CB1.length; i++){
         array.push(`In ${CB1[i]}, ${CB2[i]} won the world cup!`)
-    }return array;
+    }return hist;
 };
 console.log(getWinnersByYear(hist, getYears(years, getFinals(fifaData)), getWinners(winners, getFinals(fifaData))));
 
