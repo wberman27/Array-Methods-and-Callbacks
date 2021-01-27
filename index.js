@@ -70,11 +70,12 @@ Use the higher-order function called getYears to do the following:
 // console.log(getYears(years, getFinals(fifaData)));
 let years = [];
 function getYears(array, CB){
-    years = CB.map(function(item){
-        return item.Year; 
+    const getFinals = CB(array);
+    getFinals.forEach(function(item){
+        return years.push(item.Year); 
     }); return years;
 }
-console.log(getYears(years, getFinals(fifaData)));
+console.log(getYears(fifaData, getFinals));
 
 /* 🚀🚀🚀🚀🚀🚀🚀🚀🚀🚀 Task 4: 🚀🚀🚀🚀🚀🚀🚀🚀🚀🚀
 Use the higher-order function getWinners to do the following:  
@@ -98,16 +99,17 @@ Use the higher-order function getWinners to do the following:
 // console.log(getWinners(winners, getFinals(fifaData)));
 let winners = [];
 function getWinners(array, CB){
-    winners = CB.map(function(item){
+    const getFinals = CB(array);
+    getFinals.forEach(function(item){
         if(item["Home Team Goals"] > item["Away Team Goals"]){
-            return item["Home Team Name"];
+            return winners.push(item["Home Team Name"]);
         }
         else {
-            return item["Away Team Name"];
+            return winners.push(item["Away Team Name"]);
             }
     }); return winners;
 }
-console.log(getWinners(winners, getFinals(fifaData)));
+console.log(getWinners(fifaData, getFinals));
 
 
 /* 🚀🚀🚀🚀🚀🚀🚀🚀🚀🚀 Task 5: 🚀🚀🚀🚀🚀🚀🚀🚀🚀🚀 
@@ -126,16 +128,15 @@ hint: the strings returned need to exactly match the string in step 4.
 //         array.push(`In ${CB1[i]}, ${CB2[i]} won the world cup!`)
 //     }return hist;
 // };
-let hist = [];
-let Y;
-let W;
+
 function getWinnersByYear(array, CB1, CB2){
-    hist = CB1.map(function(item1, i){
-        return `In ${CB1[i]}, ${CB2[i]} won the world cup!`;
+    const getYears = CB1(array, getFinals);
+    const getWinners = CB2(array, getFinals);
+    return getYears.map(function(item1, i){
+        return `In ${item1}, ${getWinners[i]} won the world cup!`;
     });
-    return hist;
 } 
-console.log(getWinnersByYear(hist, getYears(years, getFinals(fifaData)), getWinners(winners, getFinals(fifaData))));
+console.log(getWinnersByYear(fifaData, getYears, getWinners));
 
 
 /* 🚀🚀🚀🚀🚀🚀🚀🚀🚀🚀 Task 6: 🚀🚀🚀🚀🚀🚀🚀🚀🚀🚀
