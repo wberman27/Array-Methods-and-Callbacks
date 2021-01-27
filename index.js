@@ -25,10 +25,10 @@ Use getFinals to do the following:
 hint - you should be looking at the stage key inside of the objects
 */
 
-const finals = [];
+const finals = []; //I would use .filter here
 function getFinals(data){
     for(let i=0; i<data.length; i++){
-        if(data[i]["Stage"] === "Final" && finals.includes(data[i]) === false){
+        if(data[i]["Stage"] === "Final" && finals.includes(data[i]) === false){ //this conditional required for some odd reason
             finals.push(data[i]);
         }
     } return finals;
@@ -44,10 +44,10 @@ Use the higher-order function called getYears to do the following:
 2. Receive a callback function getFinals from task 2 
 3. Return an array called years containing all of the years in the getFinals data set*/
 
-const years = [];
+const years = []; // I would use .map here
 function getYears(array, CB){
     for(let i=0; i<CB.length; i++){
-        if(years.includes(CB[i]['Year']) === false){
+        if(years.includes(CB[i]['Year']) === false){ //this conditional required for some odd reason
         array.push(CB[i]['Year']);
         }
     }return years;
@@ -62,7 +62,7 @@ Use the higher-order function getWinners to do the following:
 3. Determines the winner (home or away) of each `finals` game. 
 4. Returns the names of all winning countries in an array called `winners` */ 
 
-const winners = [];
+const winners = []; //I would use .filter here
 function getWinners(array, CB1) {
     for(let i=0; i<CB1.length; i++){
         if(CB1[i]["Home Team Goals"] > CB1[i]["Away Team Goals"]){
@@ -72,7 +72,7 @@ function getWinners(array, CB1) {
                     winners.push(CB1[i]["Away Team Name"]);
                 }
                   
-    }return winners;
+    }return winners; //this still copies the names so array ends up being twice as large...
 };
 console.log(getWinners(winners, getFinals(fifaData)));
 
@@ -107,7 +107,7 @@ Use the higher order function getAverageGoals to do the following:
  Example of invocation: getAverageGoals(getFinals(fifaData));
 */
 
-function getAverageGoals(CB)
+function getAverageGoals(CB) //I would use .reduce here
 {
     return (addFunc / CB.length).toFixed(2);
 }
